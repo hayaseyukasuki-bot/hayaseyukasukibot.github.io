@@ -1,0 +1,1353 @@
+/* ============================================
+   全局样式 - 全屏滚动效果
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --red-primary: #c41e1e;
+    --red-dark: #8b0000;
+    --red-light: #ff4444;
+    --gold: #ffd700;
+    --bg-dark: #2c1810;
+    --text-white: #ffffff;
+    --text-gold: #f4e4c1;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background: #1a1a1a;
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 每个页面占满整屏 */
+.page {
+    width: 100vw;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+/* 移除旧的active状态控制 */
+.page.active {
+    /* 不需要了，因为使用滚动 */
+}
+
+/* ============================================
+   封面页样式 - 竖向细长布局
+   ============================================ */
+.page-cover {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(180deg, #2c1810 0%, #4a2617 50%, #2c1810 100%);
+    height: 100vh;
+    min-height: 100vh;
+    padding: 60px 20px 40px;
+}
+
+.cover-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.cover-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.cover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, 
+        rgba(44,24,16,0.75) 0%, 
+        rgba(196,30,30,0.6) 50%, 
+        rgba(44,24,16,0.85) 100%);
+    z-index: 1;
+}
+
+.cover-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: coverFadeIn 1.5s ease;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+@keyframes coverFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.red-star {
+    font-size: 50px;
+    color: var(--red-primary);
+    text-shadow: 0 0 20px rgba(196,30,30,0.8), 0 0 40px rgba(196,30,30,0.4);
+    animation: starPulse 2s ease-in-out infinite;
+}
+
+.top-star {
+    margin-bottom: 15px;
+}
+
+.bottom-star {
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+@keyframes starPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.15);
+        opacity: 0.8;
+    }
+}
+
+.red-flag {
+    font-size: 45px;
+    display: inline-block;
+    animation: flagWave 3s ease-in-out infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes flagWave {
+    0%, 100% {
+        transform: rotate(-10deg);
+    }
+    50% {
+        transform: rotate(10deg);
+    }
+}
+
+.main-title {
+    font-size: 38px;
+    font-weight: bold;
+    color: var(--red-primary);
+    text-shadow: 
+        3px 3px 0 var(--gold),
+        6px 6px 10px rgba(0,0,0,0.5);
+    margin: 12px 0;
+    letter-spacing: 4px;
+    line-height: 1.4;
+}
+
+.sub-title {
+    font-size: 34px;
+    font-weight: bold;
+    color: var(--gold);
+    text-shadow: 
+        2px 2px 0 var(--red-dark),
+        4px 4px 8px rgba(0,0,0,0.5);
+    margin-bottom: 20px;
+    letter-spacing: 3px;
+}
+
+.divider-line {
+    width: 200px;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        var(--gold), 
+        var(--red-primary), 
+        var(--gold), 
+        transparent);
+    margin: 20px auto;
+}
+
+.slogan {
+    font-size: 26px;
+    color: var(--text-gold);
+    font-weight: 500;
+    margin: 20px 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    letter-spacing: 2px;
+}
+
+.year-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--red-dark), var(--red-primary));
+    border: 3px solid var(--gold);
+    border-radius: 50px;
+    padding: 12px 30px;
+    margin: 20px 0;
+    box-shadow: 0 8px 20px rgba(196,30,30,0.5);
+}
+
+.year-text {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--gold);
+    letter-spacing: 3px;
+}
+
+.start-btn {
+    margin-top: 30px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btn-inner {
+    background: linear-gradient(135deg, var(--red-primary), var(--red-dark));
+    border: 3px solid var(--gold);
+    border-radius: 50px;
+    padding: 20px 45px;
+    box-shadow: 
+        0 10px 30px rgba(196,30,30,0.6),
+        inset 0 2px 10px rgba(255,215,0,0.3);
+    transition: all 0.3s ease;
+}
+
+.start-btn:active .btn-inner {
+    transform: scale(0.95);
+    box-shadow: 
+        0 5px 15px rgba(196,30,30,0.4),
+        inset 0 2px 10px rgba(255,215,0,0.3);
+}
+
+.btn-icon {
+    font-size: 32px;
+    display: block;
+    margin-bottom: 8px;
+    animation: iconBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes iconBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.btn-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--gold);
+    letter-spacing: 2px;
+}
+
+/* 滚动提示 */
+.scroll-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    animation: scrollHintFade 2s ease-in-out infinite;
+}
+
+@keyframes scrollHintFade {
+    0%, 100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.scroll-arrow {
+    font-size: 36px;
+    color: var(--gold);
+    animation: scrollArrowBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes scrollArrowBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+.scroll-text {
+    font-size: 14px;
+    color: var(--text-gold);
+    margin-top: 5px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* ============================================
+   地图页样式 - 左右交错路径布局
+   ============================================ */
+.page-map {
+    position: relative;
+    height: 100vh;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background-image: url('封面/AC3A4573570FBD21E7AB951EB1875037.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* 红色调覆盖层 */
+.page-map::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, 
+        rgba(139, 0, 0, 0.75) 0%, 
+        rgba(196, 30, 30, 0.7) 50%, 
+        rgba(139, 0, 0, 0.8) 100%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.map-bg-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(rgba(255, 215, 0, 0.1) 2px, transparent 2px);
+    background-size: 40px 40px;
+    opacity: 0.4;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.map-header {
+    position: relative;
+    padding: 30px 20px 10px;
+    text-align: center;
+    z-index: 3;
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+.map-title {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--gold);
+    text-shadow: 
+        2px 2px 0 var(--red-dark),
+        4px 4px 8px rgba(0,0,0,0.5);
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+}
+
+.map-subtitle {
+    font-size: 16px;
+    color: var(--text-gold);
+    font-weight: bold;
+    background: rgba(196, 30, 30, 0.4);
+    display: inline-block;
+    padding: 6px 18px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+.map-container {
+    position: relative;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px 0 120px;
+    z-index: 2;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    max-width: 450px; /* 限制最大宽度 */
+    margin: 0 auto; /* 居中显示 */
+}
+
+.path-svg {
+    display: none; /* 移除旧的直线路径 */
+}
+
+/* 站点标记 - 明显的左右交错布局 */
+.location-marker {
+    position: relative;
+    width: 100%;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+/* 奇数站点：明显靠左 */
+.marker-1,
+.marker-3,
+.marker-5 {
+    justify-content: flex-start;
+    flex-direction: row;
+    padding-left: 10px;
+    padding-right: 30%; /* 右侧留大空间 */
+}
+
+/* 偶数站点：明显靠右 */
+.marker-2,
+.marker-4,
+.marker-6 {
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+    padding-right: 10px;
+    padding-left: 30%; /* 左侧留大空间 */
+}
+
+/* 连接线 - S 型曲线优化（金色虚线） */
+/* 奇数站点的连接线：从左向右下弯曲 */
+.marker-1::before,
+.marker-3::before,
+.marker-5::before {
+    content: '';
+    position: absolute;
+    top: 55px;
+    left: 42px; /* 图标中心 */
+    width: 70%; /* 更宽的延伸 */
+    height: 90px;
+    border-right: 3px dashed rgba(255, 215, 0, 0.6);
+    border-bottom: 3px dashed rgba(255, 215, 0, 0.6);
+    border-bottom-right-radius: 50px; /* 更圆滑的曲线 */
+    z-index: 0;
+    pointer-events: none;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.3));
+}
+
+/* 偶数站点的连接线：从右向左下弯曲 */
+.marker-2::before,
+.marker-4::before {
+    content: '';
+    position: absolute;
+    top: 55px;
+    right: 42px;
+    width: 70%;
+    height: 90px;
+    border-left: 3px dashed rgba(255, 215, 0, 0.6);
+    border-bottom: 3px dashed rgba(255, 215, 0, 0.6);
+    border-bottom-left-radius: 50px;
+    z-index: 0;
+    pointer-events: none;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.3));
+}
+
+/* 第5站连接到第6站（右侧）的特殊曲线 */
+.marker-5::before {
+    width: 75%;
+    height: 95px;
+}
+
+.marker-icon {
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--red-primary), var(--red-dark));
+    border: 3px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    box-shadow: 0 6px 15px rgba(196, 30, 30, 0.5);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    z-index: 3;
+}
+
+/* 锁定状态 */
+.marker-icon.locked {
+    background: linear-gradient(135deg, #8b4545, #6b3030);
+    border-color: rgba(255, 215, 0, 0.4);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+/* 解锁后的样式 */
+.location-marker[data-unlocked="true"] .marker-icon {
+    background: linear-gradient(135deg, #ffd700, #ffaa00);
+    border-color: #fff;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 6px 15px rgba(196, 30, 30, 0.4);
+}
+
+.lock-icon,
+.unlock-icon {
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.marker-icon.locked .unlock-icon {
+    opacity: 0;
+    transform: scale(0) rotate(-180deg);
+    position: absolute;
+}
+
+.marker-icon.locked .lock-icon {
+    opacity: 1;
+    transform: scale(1);
+    color: #fff;
+}
+
+.marker-icon:not(.locked) .lock-icon {
+    opacity: 0;
+    transform: scale(0);
+    position: absolute;
+}
+
+.marker-icon:not(.locked) .unlock-icon {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    color: #fff;
+    animation: starRotate 3s linear infinite;
+}
+
+@keyframes starRotate {
+    from {
+        transform: scale(1) rotate(0deg);
+    }
+    to {
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+.location-marker:active .marker-icon {
+    transform: scale(0.95);
+}
+
+/* 标签样式优化 - 卡片风格 */
+.marker-label {
+    margin: 0 12px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--red-dark);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 10px 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3), 0 2px 6px rgba(196,30,30,0.2);
+    white-space: normal;
+    line-height: 1.5;
+    position: relative;
+    text-align: center;
+    min-width: 120px;
+    max-width: 160px;
+    transform: rotate(-1.5deg);
+    transition: transform 0.3s ease;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+/* 偶数站卡片反向倾斜 */
+.marker-2 .marker-label,
+.marker-4 .marker-label,
+.marker-6 .marker-label {
+    transform: rotate(1.5deg);
+}
+
+/* 鼠标悬停/点击效果 */
+.location-marker:active .marker-label {
+    transform: rotate(0deg) scale(0.97);
+}
+
+/* 三角形指示器 */
+.marker-label::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.marker-1 .marker-label::before,
+.marker-3 .marker-label::before,
+.marker-5 .marker-label::before {
+    left: -10px;
+    border: 10px solid transparent;
+    border-right-color: #fff;
+    border-right-width: 10px;
+    border-left-width: 0;
+}
+
+.marker-2 .marker-label::before,
+.marker-4 .marker-label::before,
+.marker-6 .marker-label::before {
+    right: -10px;
+    border: 10px solid transparent;
+    border-left-color: #fff;
+    border-left-width: 10px;
+    border-right-width: 0;
+}
+
+/* ============================================
+   装饰性元素 - 氛围感
+   ============================================ */
+
+.map-decorations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.cloud {
+    position: absolute;
+    font-size: 50px;
+    opacity: 0.15;
+    filter: drop-shadow(0 4px 4px rgba(0,0,0,0.3));
+    animation: floatCloud 20s linear infinite;
+}
+
+.cloud-1 { top: 10%; left: -20%; animation-duration: 25s; }
+.cloud-2 { top: 40%; right: -20%; animation-duration: 30s; animation-direction: reverse; }
+.cloud-3 { top: 70%; left: -10%; animation-duration: 22s; font-size: 40px; }
+
+@keyframes floatCloud {
+    from { transform: translateX(0); }
+    to { transform: translateX(120vw); }
+}
+
+.decoration-item {
+    position: absolute;
+    font-size: 35px;
+    opacity: 0.3;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+    animation: floatItem 3s ease-in-out infinite;
+}
+
+.car { top: 18%; right: 10%; transform: rotate(-10deg); }
+.camera { top: 55%; left: 10%; transform: rotate(15deg); animation-delay: 1s; }
+.map-icon { top: 85%; right: 15%; transform: rotate(-5deg); animation-delay: 0.5s; }
+
+@keyframes floatItem {
+    0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+    50% { transform: translateY(-10px) rotate(var(--rot, 0deg)); }
+}
+
+/* 连接点优化 */
+.marker-icon::after {
+    display: none; /* 移除旧的连接点 */
+}
+
+.map-footer {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    display: none; /* 默认隐藏 */
+    justify-content: center;
+}
+
+/* 只在地图页显示进度条 */
+.page-map .map-footer {
+    display: flex;
+}
+
+.unlock-progress {
+    background: linear-gradient(135deg, var(--red-dark), var(--red-primary));
+    border: 3px solid var(--gold);
+    border-radius: 35px;
+    padding: 12px 30px;
+    box-shadow: 0 10px 25px rgba(196,30,30,0.6),
+                0 5px 15px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    backdrop-filter: blur(10px);
+}
+
+.progress-text,
+.progress-count,
+.progress-total {
+    color: var(--gold);
+    font-size: 17px;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.progress-count {
+    font-size: 26px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* ============================================
+   结束页样式
+   ============================================ */
+.page-end {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(180deg, #2c1810 0%, #4a2617 50%, #2c1810 100%);
+    height: 100vh;
+    min-height: 100vh;
+    padding: 60px 20px 40px;
+}
+
+.end-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.end-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.end-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, 
+        rgba(44,24,16,0.8) 0%, 
+        rgba(196,30,30,0.7) 50%, 
+        rgba(44,24,16,0.85) 100%);
+    z-index: 1;
+}
+
+.end-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    animation: coverFadeIn 1.5s ease;
+    max-width: 90%;
+}
+
+.end-star {
+    font-size: 50px;
+    color: var(--red-primary);
+    text-shadow: 0 0 20px rgba(196,30,30,0.8), 0 0 40px rgba(196,30,30,0.4);
+    animation: starPulse 2s ease-in-out infinite;
+}
+
+.end-star.top-star {
+    margin-bottom: 20px;
+}
+
+.end-star.bottom-star {
+    margin: 30px 0 20px;
+}
+
+.end-title {
+    font-size: 36px;
+    font-weight: bold;
+    color: var(--gold);
+    text-shadow: 
+        2px 2px 0 var(--red-dark),
+        4px 4px 8px rgba(0,0,0,0.5);
+    margin-bottom: 20px;
+    letter-spacing: 3px;
+}
+
+.end-divider {
+    width: 200px;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        var(--gold), 
+        var(--red-primary), 
+        var(--gold), 
+        transparent);
+    margin: 20px auto;
+}
+
+.end-message {
+    font-size: 18px;
+    line-height: 2;
+    color: var(--text-gold);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    margin: 30px 0;
+}
+
+.end-note {
+    font-size: 16px;
+    color: var(--text-gold);
+    line-height: 1.8;
+    opacity: 0.9;
+    font-style: italic;
+}
+
+/* ============================================
+   详情模态框样式
+   ============================================ */
+.detail-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.detail-modal.active {
+    display: flex;
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 420px;
+    max-height: 80vh;
+    background: linear-gradient(180deg, #f5e6d3, #e8d4b8);
+    border: 4px solid var(--gold);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    overflow: hidden;
+    animation: modalSlideUp 0.4s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes modalSlideUp {
+    from {
+        transform: translateY(50px) scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    background: var(--red-primary);
+    color: white;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+}
+
+.modal-close:active {
+    transform: scale(0.9);
+    background: var(--red-dark);
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--red-primary), var(--red-dark));
+    padding: 25px 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    border-bottom: 3px solid var(--gold);
+}
+
+.modal-star {
+    font-size: 28px;
+    color: var(--gold);
+    animation: starPulse 2s ease-in-out infinite;
+}
+
+.modal-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--gold);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.modal-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.modal-gallery.single {
+    grid-template-columns: 1fr;
+}
+
+.modal-gallery img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid var(--gold);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.modal-gallery img:active {
+    transform: scale(0.95);
+}
+
+.modal-description {
+    background: rgba(255,255,255,0.8);
+    border: 2px solid var(--red-primary);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: inset 0 2px 10px rgba(196,30,30,0.1);
+}
+
+.desc-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--red-dark);
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--red-primary);
+}
+
+.desc-content {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+    text-align: justify;
+}
+
+.modal-footer {
+    padding: 20px;
+    background: linear-gradient(180deg, transparent, rgba(196,30,30,0.1));
+    text-align: center;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.modal-btn {
+    background: linear-gradient(135deg, var(--red-primary), var(--red-dark));
+    color: var(--gold);
+    border: 3px solid var(--gold);
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(196,30,30,0.4);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 4px 10px rgba(196,30,30,0.3);
+}
+
+/* 再走一次按钮 */
+.modal-btn-restart {
+    background: linear-gradient(135deg, #6b6b6b, #4a4a4a);
+    border-color: #c0c0c0;
+    padding: 12px 30px;
+    font-size: 16px;
+}
+
+/* 结束探索按钮 */
+.modal-btn-end {
+    background: linear-gradient(135deg, #ffd700, #ffaa00);
+    color: #2c1810;
+    border-color: #fff;
+    padding: 12px 30px;
+    font-size: 16px;
+}
+
+/* ============================================
+   图片全屏查看器
+   ============================================ */
+.image-fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.95);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-fullscreen.active {
+    display: flex;
+}
+
+.image-fullscreen img {
+    max-width: 95%;
+    max-height: 95%;
+    object-fit: contain;
+}
+
+/* ============================================
+   滚动条美化
+   ============================================ */
+.modal-body::-webkit-scrollbar,
+.page::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-body::-webkit-scrollbar-track,
+.page::-webkit-scrollbar-track {
+    background: rgba(196,30,30,0.1);
+    border-radius: 3px;
+}
+
+.modal-body::-webkit-scrollbar-thumb,
+.page::-webkit-scrollbar-thumb {
+    background: var(--red-primary);
+    border-radius: 3px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover,
+.page::-webkit-scrollbar-thumb:hover {
+    background: var(--red-dark);
+}
+
+/* ============================================
+   响应式适配
+   ============================================ */
+
+/* 电脑屏幕优化 - 加宽显示 */
+@media screen and (min-width: 768px) {
+    .page-cover,
+    .page-map {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    
+    .cover-content {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    /* 地图页加宽到原来的2倍 */
+    .map-header,
+    .map-container {
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .modal-content {
+        max-width: 600px;
+    }
+    
+    /* 字体也适当放大 */
+    .main-title {
+        font-size: 48px;
+    }
+    
+    .sub-title {
+        font-size: 42px;
+    }
+    
+    .slogan {
+        font-size: 28px;
+    }
+    
+    .map-title {
+        font-size: 36px;
+    }
+    
+    /* 地图页站点间距也相应增加 */
+    .location-marker {
+        margin: 65px auto;
+    }
+    
+    .marker-icon {
+        width: 85px;
+        height: 85px;
+        min-width: 85px;
+        font-size: 42px;
+    }
+    
+    .marker-label {
+        font-size: 22px;
+        padding: 12px 24px;
+        margin-left: 20px;
+    }
+    
+    .marker-2 .marker-label,
+    .marker-4 .marker-label,
+    .marker-6 .marker-label {
+        margin-left: 0;
+        margin-right: 20px;
+    }
+}
+
+/* 平板和中等屏幕 */
+@media screen and (min-width: 480px) and (max-width: 767px) {
+    .cover-content {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+    
+    .main-title {
+        font-size: 44px;
+    }
+    
+    .sub-title {
+        font-size: 38px;
+    }
+}
+
+/* 手机小屏幕优化 */
+@media screen and (max-width: 375px) {
+    .map-container {
+        padding: 20px 0 100px;
+    }
+
+    .location-marker {
+        width: 95%; /* 加宽显示区域 */
+        margin: 35px auto;
+    }
+
+    /* 减小左右偏移，让内容更集中 */
+    .marker-1, .marker-3, .marker-5 {
+        padding-left: 2%; 
+    }
+
+    .marker-2, .marker-4, .marker-6 {
+        padding-right: 2%;
+    }
+
+    .marker-icon {
+        width: 65px;
+        height: 65px;
+        min-width: 65px;
+        font-size: 32px;
+    }
+    
+    .marker-label {
+        font-size: 16px; /* 稍微调小字体防止换行 */
+        padding: 8px 12px;
+        margin-left: 10px;
+    }
+
+    .marker-2 .marker-label,
+    .marker-4 .marker-label,
+    .marker-6 .marker-label {
+        margin-left: 0;
+        margin-right: 10px;
+    }
+}
+
+/* 正常手机屏幕 (376px - 414px) */
+@media screen and (min-width: 376px) and (max-width: 767px) {
+    .location-marker {
+        width: 92%;
+        margin: 45px auto;
+    }
+    
+    .marker-1, .marker-3, .marker-5 {
+        padding-left: 3%;
+    }
+
+    .marker-2, .marker-4, .marker-6 {
+        padding-right: 3%;
+    }
+}
+
+/* 超小屏幕优化 */
+@media screen and (max-width: 360px) {
+    .main-title {
+        font-size: 30px;
+    }
+    
+    .sub-title {
+        font-size: 26px;
+    }
+    
+    .slogan {
+        font-size: 20px;
+    }
+    
+    .year-text {
+        font-size: 18px;
+    }
+    
+    .btn-text {
+        font-size: 18px;
+    }
+    
+    .map-title {
+        font-size: 22px;
+    }
+    
+    .marker-icon {
+        width: 60px;
+        height: 60px;
+        min-width: 60px;
+        font-size: 30px;
+    }
+    
+    .marker-label {
+        font-size: 16px;
+        padding: 7px 14px;
+    }
+    
+    .location-marker {
+        margin: 35px auto;
+    }
+}
+
+/* 大屏手机优化 */
+@media screen and (min-width: 414px) and (max-width: 767px) {
+    .marker-label {
+        font-size: 21px;
+        padding: 11px 22px;
+    }
+    
+    .marker-icon {
+        width: 75px;
+        height: 75px;
+        min-width: 75px;
+    }
+    
+    .location-marker {
+        margin: 55px auto;
+    }
+}
+
+/* ============================================
+   装饰性元素
+   ============================================ */
+
+/* 移除旧的装饰线样式 */
+.marker-1::after,
+.marker-3::after,
+.marker-5::after,
+.marker-2::after,
+.marker-4::after,
+.marker-6::after {
+    display: none;
+}
+
+/* 添加连接点 */
+.marker-icon::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border: 2px solid #4facfe;
+    border-radius: 50%;
+    z-index: -1;
+    box-shadow: 0 0 5px rgba(255,255,255,0.5);
+}
+
+.marker-1 .marker-icon::after,
+.marker-3 .marker-icon::after,
+.marker-5 .marker-icon::after {
+    right: -24px;
+}
+
+.marker-2 .marker-icon::after,
+.marker-4 .marker-icon::after,
+.marker-6 .marker-icon::after {
+    left: -24px;
+}
+
+/* ============================================
+   加载动画
+   ============================================ */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.loading {
+    animation: pulse 1.5s ease-in-out infinite;
+}

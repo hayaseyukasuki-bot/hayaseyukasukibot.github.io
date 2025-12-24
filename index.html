@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>走进红二十五军的起源地 - 一起解锁红色故事</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 首页封面 -->
+    <section class="page page-cover active" id="page-cover">
+        <div class="cover-bg">
+            <img src="封面/AC3A4573570FBD21E7AB951EB1875037.jpg" alt="封面">
+        </div>
+        <div class="cover-overlay"></div>
+        <div class="cover-content">
+            <div class="red-star top-star">★</div>
+            <div class="red-flag">🚩</div>
+            <h1 class="main-title">走进红二十五军</h1>
+            <h2 class="sub-title">的起源地</h2>
+            <div class="divider-line"></div>
+            <h3 class="slogan">一起解锁红色故事</h3>
+            <div class="red-star bottom-star">★</div>
+            <div class="start-btn" onclick="startJourney()">
+                <div class="btn-inner">
+                    <span class="btn-icon">⚔️</span>
+                    <p class="btn-text">开启红色之旅</p>
+                </div>
+            </div>
+            <div class="scroll-hint">
+                <div class="scroll-arrow">↓</div>
+                <p class="scroll-text">向下滑动探索</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 红色地图页 - 6个站点 -->
+    <section class="page page-map" id="page-map">
+        <!-- 背景装饰层 -->
+        <div class="map-decorations">
+            <div class="cloud cloud-1">☁️</div>
+            <div class="cloud cloud-2">☁️</div>
+            <div class="cloud cloud-3">☁️</div>
+            <div class="decoration-item car">🚌</div>
+            <div class="decoration-item camera">📷</div>
+            <div class="decoration-item map-icon">🗺️</div>
+        </div>
+        
+        <div class="map-bg-pattern"></div>
+        <div class="map-header">
+            <h2 class="map-title">红色征程地图</h2>
+            <p class="map-subtitle">点击图标 · 解锁红色记忆</p>
+        </div>
+        
+        <div class="map-container">
+            <!-- 红色路径线用CSS实现 -->
+            <div class="path-svg"></div>
+            
+            <!-- 站点1 - 斑竹园镇 -->
+            <div class="location-marker marker-1" onclick="unlockStation(1)" data-unlocked="false">
+                <div class="marker-icon locked">
+                    <span class="lock-icon">🔒</span>
+                    <span class="unlock-icon">★</span>
+                </div>
+                <div class="marker-label">斑竹园镇<br>红色摇篮</div>
+            </div>
+            
+            <!-- 站点2 - 将军故里 -->
+            <div class="location-marker marker-2" onclick="unlockStation(2)" data-unlocked="false">
+                <div class="marker-icon locked">
+                    <span class="lock-icon">🔒</span>
+                    <span class="unlock-icon">★</span>
+                </div>
+                <div class="marker-label">将军故里<br>英雄辈出</div>
+            </div>
+            
+            <!-- 站点3 - 立夏节起义 -->
+            <div class="location-marker marker-3" onclick="unlockStation(3)" data-unlocked="false">
+                <div class="marker-icon locked">
+                    <span class="lock-icon">🔒</span>
+                    <span class="unlock-icon">★</span>
+                </div>
+                <div class="marker-label">立夏节起义<br>革命烽火</div>
+            </div>
+            
+            <!-- 站点4 - 会师广场 -->
+            <div class="location-marker marker-4" onclick="unlockStation(4)" data-unlocked="false">
+                <div class="marker-icon locked">
+                    <span class="lock-icon">🔒</span>
+                    <span class="unlock-icon">★</span>
+                </div>
+                <div class="marker-label">会师广场<br>红军诞生</div>
+            </div>
+            
+            <!-- 站点5 - 烈士纪念园 -->
+            <div class="location-marker marker-5" onclick="unlockStation(5)" data-unlocked="false">
+                <div class="marker-icon locked">
+                    <span class="lock-icon">🔒</span>
+                    <span class="unlock-icon">★</span>
+                </div>
+                <div class="marker-label">烈士纪念园<br>英魂永驻</div>
+            </div>
+            
+            <!-- 站点6 - 红色小镇 -->
+            <div class="location-marker marker-6" onclick="unlockStation(6)" data-unlocked="false">
+                <div class="marker-icon locked">
+                    <span class="lock-icon">🔒</span>
+                    <span class="unlock-icon">★</span>
+                </div>
+                <div class="marker-label">红色小镇<br>薪火相传</div>
+            </div>
+        </div>
+        
+        <div class="map-footer">
+            <div class="unlock-progress">
+                <span class="progress-text">已解锁：</span>
+                <span class="progress-count" id="unlockCount">0</span>
+                <span class="progress-total">/6</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 结束页 -->
+    <section class="page page-end" id="page-end">
+        <div class="end-bg">
+            <img src="封面/AC3A4573570FBD21E7AB951EB1875037.jpg" alt="结束页背景">
+        </div>
+        <div class="end-overlay"></div>
+        <div class="end-content">
+            <div class="end-star top-star">★</div>
+            <h1 class="end-title">恭喜完成探索！</h1>
+            <div class="end-divider"></div>
+            <p class="end-message">
+                您已成功解锁全部红色故事<br>
+                深入了解了斑竹园的革命历史<br>
+                感受了先烈们的英勇事迹
+            </p>
+            <div class="end-star bottom-star">★</div>
+            <p class="end-note">如想了解更多<br>请关注后续更新</p>
+        </div>
+    </section>
+
+    <!-- 详情弹窗模态框 -->
+    <div class="detail-modal" id="detailModal">
+        <div class="modal-overlay" onclick="closeModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <div class="modal-header">
+                <div class="modal-star">★</div>
+                <h3 class="modal-title" id="modalTitle">站点标题</h3>
+                <div class="modal-star">★</div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-gallery" id="modalGallery">
+                    <!-- 图片将通过JS动态加载 -->
+                </div>
+                <div class="modal-description">
+                    <h4 class="desc-title">历史介绍</h4>
+                    <p class="desc-content" id="modalDesc">
+                        这里是站点的详细介绍内容...
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer" id="modalFooter">
+                <button class="modal-btn" onclick="closeModal()">继续探索</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
